@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <main>
+        <p>Paragrafo original inserido no elemento main</p>
+    </main>
+
+    <script>
+       let count = 0
+       document.addEventListener('DOMContentLoaded',()=>{
+           document.body.addEventListener('click',(ev)=>{
+               count ++
+               let main = document.querySelector('main')
+               let originalPara = document.querySelector('p')
+               let p = document.createElement('p')
+               p.textContent = `Este e o paragrafo ${count} created e inserido antes`
+               main.insertBefore(p, originalPara)              
+           })
+       })
+    </script>
+    
+</body>
+</html>

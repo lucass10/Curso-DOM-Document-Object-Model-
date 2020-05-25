@@ -1,0 +1,42 @@
+    <!DOCTYPE html>
+    <!-- this comment is a child of the document -->
+    <html lang="pt-br">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width">
+        <!-- This comment is a child element of the head element -->
+    </head>
+    <!-- this comment is a child of the html element -->
+    <body>
+        <h1>Selecionando elementos DOM</h1>
+    <section id="secao">
+        <ul id="item-list">
+            <li class="item">Item 1</li>
+            <li class="item">Item 2</li>
+            <li class="item">Item 3</li>
+        </ul>
+    </section>
+    <input type="text" id="txtTexto"> 
+    
+    </body>
+    <script>
+        let li = document.querySelectorAll('.item')
+        let li2 = document.getElementsByClassName('item')
+
+       function criarNome(nome){
+           let n = nome
+           function getName(){
+               return n 
+           }
+           function setName(novonome){
+               n = novonome
+           }
+           return {getName,setName}
+       }
+       let lucas = criarNome('lucas')
+       lucas.setName('lucas da silva pessoa')
+       console.log(lucas.getName())
+         
+        
+    </script>
+    </html>

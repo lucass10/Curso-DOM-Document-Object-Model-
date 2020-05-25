@@ -1,0 +1,279 @@
+
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+    </head>
+    <body>
+        <h1>Teste adicionais js</h1>
+
+    <script>
+
+
+    
+    //call PRIMEIRO PARAMETRO E O THIS DEPOIS OS PARAMETROS//
+    //aply PRIMEIRO PARAMETRO E O THIS DEPOIS OS PARAMETROS EM UM ARRAY//
+    //BID Primeiro parametro ele passa o this depois os parametros //
+    
+    //ESCOPO DINAMICO //
+    function imprimirThis(){
+        console.log(this)
+    }
+    function imprimirMsg(){
+        imprimirThis.call({ms:'Sou um objeto'})
+    }
+    function imprimirMsg2(){
+        imprimirThis.apply(['sou um array'])
+    }
+    imprimirMsg2()
+    // ESCOPO DINAMICO //
+    if(true){
+        let autor = 'lucas'
+    }
+    let autor = 'lucasfdfd'
+    {
+        let autor = 'lukinhas'
+        console.log(autor)    
+    }
+    function imprimerUmNOme(nome){
+        let n = nome
+        return function(){
+            console.log(n)
+        }
+    }
+
+    //CLOUSURES //
+    function minhaBiblioteca(){
+        let auxiliar = (valor => valor + 10) 
+        return {
+            add5(){
+                return auxiliar(5)
+            },
+            add7(){
+                return auxiliar(10)
+            }
+        }
+    }
+    let biblioteca = minhaBiblioteca()
+    console.log(biblioteca.add5())
+    //CLOUSURES//
+
+
+    function imprimeNomeCompleto(nome){
+        return ()=>{
+            console.log(nome)
+        }
+    }
+    (function inicializa(nome){
+        let no = nome
+        setTimeout(imprimeNomeCompleto(no),4000)
+    })('lucas da silva pesssoa')
+
+    const numeros = [2,3,6,5,10]
+
+    function reduzir(array){
+        let soma = 0 
+        for(let i=0; i<array.length; i++){
+            soma += array[i]
+        }
+        return soma
+    }
+    let lfdsafs = numeros.reduce((previous,number)=>previous+number, 0)
+    console.log(lfdsafs)
+
+    const novos = numeros.map((valor,indice)=>{
+        let bollean = indice > 0 && indice < 4
+        if(bollean) return valor
+    }).filter(y => y!=undefined)
+
+
+
+    const pessoas = [
+    {
+        nome: 'tiago',
+        idade: 18
+    },
+    {
+        nome: 'joao',
+        idade: 16
+    },
+    {
+        nome: 'maria',
+        idade: 19
+    },
+    {
+        nome: 'julieta',
+        idade: 12
+    },
+    ]
+    const testep = pessoas.reduce((valorAcumulador,valorAtual)=>{
+    let idade = valorAtual.idade >=18 ? 'maior' : 'menor'
+    valorAcumulador[idade].push(valorAtual)
+    return valorAcumulador
+    } , { maior:[], menor:[]} )
+    
+    var maxCallback = ( acc, cur ) => Math.max( acc.x, cur.x );
+    let maxReduce = [{x:42},{x:800},{x:23},{x:900}].map(ele => ele.x)
+    .reduce((ac,cur)=>{
+        let resultado = Math.max(ac,cur)
+        return resultado 
+    },50)
+ 
+  
+  let nomes = ['lucas','pedro','tiago','jose','lucas','pedro']
+       nomesContador = nomes.reduce((acumulador,nomeCorrente)=>{
+           nomeCorrente in acumulador ? acumulador[nomeCorrente] ++ :acumulador[nomeCorrente] = 1
+           return acumulador       
+   },{})
+
+    let pessoass = [
+     { nome: 'Alice', idade: 21 },
+     { nome: 'Max', idade: 20 },
+     { nome: 'Jane', idade: 20 }
+  ];
+
+
+  function agrupar(arrayObjetos,propriedade){
+      return arrayObjetos.reduce((acumulador,corrente)=>{
+      let key = corrente[propriedade]
+      if(!acumulador[key]){
+          acumulador[key] = []
+      }
+      acumulador[key].push(corrente)
+      return acumulador
+      },{})
+  }
+
+
+  let teste123 = agrupar(pessoass,'idade')
+  let friends = [{
+  name: 'Anna',
+  books: ['Bible', 'Harry Potter'],
+  age: 21
+}, {
+  name: 'Bob',
+  books: ['War and peace', 'Romeo and Juliet'],
+  age: 26
+}, {
+  name: 'Alice',
+  books: ['The Lord of the Rings', 'The Shining'],
+  age: 18
+}];
+let allboks = friends.reduce((acumulador,corrente)=>{
+let teste = [...acumulador,...corrente.books]
+return teste
+},['Alphabet'])
+
+
+let arr = [1,1,2,45,67,67,1]
+let filtrados = arr.filter((x,indice)=>{
+   return arr.indexOf(x) == indice
+})
+console.log(filtrados)
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+        /*
+    const getAnimals = (name) => ({
+    Lion: 'The Lion is a mammalian animal.',
+    Chicken: 'Chicken is a bird.',
+    }[name] || 'Animal not Found');
+
+        let testeAnimal = getAnimals('Chicken')
+        console.log(testeAnimal)
+
+        function Usuario(){
+            this.nome = 'lucas'
+            this.soma = function(a,b){
+                return a +b
+            }
+        } 
+    let us = new Usuario()
+    function Personagem(p1,p2,p3){
+        console.log(p1, p2, p3)
+        console.log('personagem this', this)
+    }
+    let p1 = {
+        nome :'lucas'
+    }
+
+
+    Personagem.call(p1,'param1',123,[5])
+    Personagem.apply(p1,['param1',123,[9,45,6]])
+    let p = Personagem.bind(p1,'lucas','fdsaf')
+    p('silva')
+    
+    let soma = (a,b) => ({v1:a,v2:b})
+    console.log(soma(2,3))
+    let usua = (nome,idade,sexo) => ({nome,idade,sexo})
+    let imprimiThis = ()=>{
+        console.log(this)
+    }
+        let programadores = [{
+        nome:'lukinhas',
+        sobrenome:'silva',
+        programador: 'js'
+    },
+    {
+    nome : 'pedro',
+    sobrenome: 'santos',
+    programador :'java' 
+    }
+    ]
+
+    let lucas = {nome:'lucas'}
+    if(lucas.hasOwnProperty('nome')){
+    console.log("Proprieda nativa do objeto")
+    }
+    function Foo(){}
+    function Bar(){}
+    function Baz(){}
+    Bar.prototype = Object.create(Foo.prototype)
+    let bar = new Bar()
+    console.log(Bar.prototype.isPrototypeOf(bar))
+
+    console.log(Object.prototype)
+    for(let i in programadores){
+    if(programadores.hasOwnProperty(i)){
+        console.log(programadores[i])
+    }
+    }
+    console.log(nome)
+    let usuario = {
+        posicao : 0,
+        get proximo(){
+            ++this.posicao
+        },
+        get anterior(){
+            --this.posicao
+        },
+        set atual(posicao){
+            this.posicao = posicao
+        },
+        get atual(){
+            return clientes[this.posicao]
+        }
+    }
+    //DESTRUCTOR//
+    const imagens = {
+        xs: {jpg:{image: 'https://via.placeholder.com/1000x1000'}}}
+        const {xs:{jpg:{image:minhaImagem}}} = imagens
+    */    
+
+        </script>
+    </body>
+    </html>
+

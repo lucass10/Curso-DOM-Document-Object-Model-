@@ -1,0 +1,35 @@
+        <!DOCTYPE html>
+        <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Document</title>
+        </head>
+        <body>
+            <h1>Erros de Tela &amp;: </h1>
+            <p> <img src="fdsafds" id="badImg" alt="no alt"> </p>
+            <script>
+                /*Window.onerror = function(msg,url, line,col, err){
+                    console.log(msg, url, line, col, err)
+                }
+                */
+        
+
+               document.addEventListener('DOMContentLoaded',function(){
+                   let img = document.getElementById('badImg')
+                   img.onerror = function(){
+                       console.warn('imagem não carregou ')
+                   }
+               })
+                window.addEventListener('error', function(ev){
+                    console.log(ev.type)
+                    console.warn(ev)
+                    ev.preventDefault()
+                })
+           
+                
+                     
+            </script>
+            
+        </body>
+        </html>
